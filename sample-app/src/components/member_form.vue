@@ -17,6 +17,7 @@
       <v-btn outline round class="lime" v-for="job in jobs" :key="`first-${job}`">{{ job }}</v-btn>
       <v-card-title>実務可能な技術を選択してください</v-card-title>
       <v-btn round outline class="lime" v-for="skill in skills" :key="skill">{{ skill }}</v-btn>
+      <v-card-title>簡単にアピールポイント教えてください。</v-card-title>
       <v-textarea solo placeholder="独学で勉強をしてきたので、詰まっても自己解決するのが得意です."></v-textarea>
     </v-card>
   </v-container>
@@ -24,17 +25,29 @@
 
 <script>
 export default {
-  name: 'Member',
-  data () {
+  name: "Member",
+  data() {
     return {
-      prices: ['2万~', '2.5万~', '3万~', '3.5万~', '4万~', 'それ以上'],
-      days: ['週2', '週3', '週4', '週5',],
-      works: ['常駐', '一部常駐OK', 'フルリモート'],
-      areas: ['首都圏', '関西', 'その他'],
-      jobs: ['1年未満', '1年', '2年', '3~5年', 'それ以上'],
-      skills: ['JaVa', 'PHP', 'Python', 'C#', 'Ruby', 'React.js', 'Angular.js', 'Vue.js', 'AWS', 'Docker', 'Laravel']
-    }
+      prices: ["2万~", "2.5万~", "3万~", "3.5万~", "4万~", "それ以上"],
+      days: ["週2", "週3", "週4", "週5"],
+      works: ["常駐", "一部常駐OK", "フルリモート"],
+      areas: ["首都圏", "関西", "その他"],
+      jobs: ["1年未満", "1年", "2年", "3~5年", "それ以上"],
+      skills: [
+        "JaVa",
+        "PHP",
+        "Python",
+        "C#",
+        "Ruby",
+        "React.js",
+        "Angular.js",
+        "Vue.js",
+        "AWS",
+        "Docker",
+        "Laravel"
+      ]
+    };
   }
-}
+};
 </script>
 
