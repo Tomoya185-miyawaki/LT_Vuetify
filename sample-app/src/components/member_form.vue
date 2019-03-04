@@ -18,7 +18,7 @@
       <v-card-title>実務可能な技術を選択してください</v-card-title>
       <v-btn round outline class="lime" v-for="skill in skills" :key="skill">{{ skill }}</v-btn>
       <v-card-title>簡単にアピールポイント教えてください。</v-card-title>
-      <v-textarea solo placeholder="独学で勉強をしてきたので、詰まっても自己解決するのが得意です."></v-textarea>
+      <v-textarea solo placeholder="独学で勉強をしてきたので、詰まっても自己解決するのが得意です."></v-textarea>      
     </v-card>
   </v-container>
 </template>
