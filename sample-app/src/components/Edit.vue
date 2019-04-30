@@ -50,9 +50,8 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
 			this.user = user;
-			const db = firebase.firestore();
 			const uid = firebase.auth().currentUser.uid;
-			const docRef = db.collection("user").doc(uid);
+			const docRef = this.col.doc(uid);
 			docRef.get().then(doc => {
 				this.price = doc.data().price
 				this.day = doc.data().day
@@ -66,7 +65,8 @@ export default {
 	},
 	methods: {
 		update() {
-			this.col.add({
+			const uid = firebase.auth().currentUser.uid;
+			this.col.doc(uid).update({
 				price: this.price,
 				day: this.day,
 				work: this.work,
@@ -75,7 +75,7 @@ export default {
 				skill: this.skill,
 				appeal: this.appeal,
 			});
-			this.$router.push("/edit");
+			this.$router.push("/profile");
 		},
 		logout: function() {
       firebase.auth().signOut();

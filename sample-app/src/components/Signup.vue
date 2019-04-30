@@ -25,10 +25,20 @@ export default {
 	},
 	methods: {
 		signup: function() {
-			firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
-			this.$router.push('/');
+			firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+			.then(user => {
+				this.$router.push('/');
+			}).catch(error => {
+				alert(error.message)
+			})
 		}
 	}
 };
 </script>
 
+<style scoped>
+a {
+	text-decoration: none;
+	color: #000;
+}
+</style>
