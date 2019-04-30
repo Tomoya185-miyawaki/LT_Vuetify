@@ -25,19 +25,8 @@ export default {
 	},
 	methods: {
 		signup: function() {
-			const db = firebase.firestore()
-      const uid = firebase.auth().currentUser.uid
-			firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-			db.collection('user').doc(uid).set({
-        email: this.email
-      })
-			.then(user => {
-				console.log(user)
-				this.$router.push('/')
-			})
-			.catch(error => {
-				alert(error.messege)
-			})
+			firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+			this.$router.push('/');
 		}
 	}
 };

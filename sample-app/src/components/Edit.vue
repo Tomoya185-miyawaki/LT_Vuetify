@@ -23,7 +23,7 @@
       <v-text-field v-model="skill" :counter="100" label="Skill" placeholder="Vue.js,Laravel" required></v-text-field>
       <v-card-title>簡単にアピールポイント教えてください。</v-card-title>
       <v-textarea solo placeholder="独学で勉強をしてきたので、詰まっても自己解決するのが得意です." v-model="appeal"></v-textarea>
-			<div class="text-md-right"><v-btn round class="white" @click="create">送信する</v-btn></div>
+			<div class="text-md-right"><v-btn round class="white" @click="update">変更する</v-btn></div>
     </v-card>
   </v-container>
 </template>
@@ -32,7 +32,7 @@
 import firebase from 'firebase';
 
 export default {
-  name: "Signin",
+  name: "Edit",
   data() {
     return {
 			user: "",
@@ -50,12 +50,23 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
 			this.user = user;
+			const db = firebase.firestore();
+			const uid = firebase.auth().currentUser.uid;
+			const docRef = db.collection("user").doc(uid);
+			docRef.get().then(doc => {
+				this.price = doc.data().price
+				this.day = doc.data().day
+				this.work = doc.data().work
+				this.area = doc.data().area
+				this.job = doc.data().job
+				this.skill = doc.data().skill
+				this.appeal = doc.data().appeal
+			});
 		});
 	},
 	methods: {
-		create() {
-			const uid = firebase.auth().currentUser.uid;
-			this.col.doc(uid).set({
+		update() {
+			this.col.add({
 				price: this.price,
 				day: this.day,
 				work: this.work,
