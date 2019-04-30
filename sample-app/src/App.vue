@@ -1,21 +1,12 @@
 <template>
   <v-content>
-    <Member/>
+    <router-view/>
   </v-content>
 </template>
 
 <script>
-import Member from './components/member_form'
 
 export default {
   name: 'App',
-  components: {
-    Member
-  },
-  data () {
-    return {
-      //
-    }
-  }
 }
 </script>
