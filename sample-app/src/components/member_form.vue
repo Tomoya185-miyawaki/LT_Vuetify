@@ -32,7 +32,6 @@ export default {
   name: "Member",
   data() {
     return {
-			user: "",
 			col: firebase.firestore().collection("user"),
       price: "",
       day: "",
@@ -48,7 +47,6 @@ export default {
     this.loading = true;
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
-			this.user = user;
       if (!user) this.$router.push("/signin");
       this.loading = false;
 		});
