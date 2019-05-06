@@ -1,9 +1,6 @@
 <template>
   <v-container>
-		<div class="text-md-center" v-if="!user" key="login">
-			<router-link to="/signin"><v-btn class="blue accent-1">サインインページへ</v-btn></router-link>
-		</div>
-    <v-card class="pa-4" v-else key="logout">
+    <v-card class="pa-4" v-if="!loading">
 			<div class="d-flex">
 				<v-card-title class="font-weight-bold">新規会員登録フォーム(3分で完了)</v-card-title>
 				<span class="text-md-right"><v-btn @click="logout">ログアウト</v-btn></span>
@@ -44,9 +41,11 @@ export default {
       job: "",
       skill: "",
 			appeal: "",
+			loading: false,
     };
 	},
 	created() {
+		this.loading = true;
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
 			this.user = user;
@@ -61,6 +60,7 @@ export default {
 				this.skill = doc.data().skill
 				this.appeal = doc.data().appeal
 			});
+			this.loading = false;
 		});
 	},
 	methods: {
