@@ -9,7 +9,9 @@ import Profile from '@/components/Profile'
 Vue.use(Router)
 
 export default new Router({
-	routes: [{
+  mode: 'history',
+  routes: [
+    {
 			path: '/signin',
 			name: 'Signin',
 			component: Signin

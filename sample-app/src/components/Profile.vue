@@ -71,7 +71,8 @@ export default {
 			const alert = confirm("本当に削除しますか");
 			if (alert == true) {
 				this.col.doc(uid).delete()
-				this.$router.push('/')
+        .then(this.$router.push('/'))
+        .catch(error => alert(error.message))
 			} else {
 				return ""
 			}

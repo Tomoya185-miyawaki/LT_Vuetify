@@ -1,9 +1,6 @@
 <template>
   <v-container>
-		<div class="text-md-center" v-if="!user" key="login">
-			<router-link to="/signin"><v-btn>サインインページへ</v-btn></router-link>
-		</div>
-    <v-card class="pa-4" v-else key="logout">
+    <v-card class="pa-4" v-show="!loading">
 			<div class="d-flex">
 				<v-card-title class="font-weight-bold">新規会員登録フォーム(3分で完了)</v-card-title>
 				<span class="text-md-right"><v-btn @click="logout">ログアウト</v-btn></span>
@@ -32,10 +29,9 @@
 import firebase from 'firebase';
 
 export default {
-  name: "Signin",
+  name: "Member",
   data() {
     return {
-			user: "",
 			col: firebase.firestore().collection("user"),
       price: "",
       day: "",
@@ -44,12 +40,15 @@ export default {
       job: "",
       skill: "",
 			appeal: "",
+      loading: false,
     };
 	},
 	created() {
+    this.loading = true;
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
-			this.user = user;
+      if (!user) this.$router.push("/signin");
+      this.loading = false;
 		});
 	},
 	methods: {
@@ -63,10 +62,11 @@ export default {
 				job: this.job,
 				skill: this.skill,
 				appeal: this.appeal,
-			});
-			this.$router.push("/profile");
+			})
+      .then(this.$router.push("/profile"))
+      .catch(error => alert(error.message))
 		},
-		logout: function() {
+		logout() {
       firebase.auth().signOut();
       this.$router.push("/signin");
     },

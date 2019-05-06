@@ -19,7 +19,6 @@ export default {
   data() {
     return {
 			show: false,
-			user: "",
 			email: "",
 			password: "",
     }
@@ -27,10 +26,7 @@ export default {
 	methods: {
 		signin: function() {
 			firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-			.then(user => {
-				this.user = user
-				this.$router.push('/')
-			})
+			.then(this.$router.push('/'))
 			.catch(error => {
 				alert(error.messege)
 			})
