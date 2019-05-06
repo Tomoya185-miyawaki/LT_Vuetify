@@ -68,7 +68,7 @@ export default {
       .then(this.$router.push("/profile"))
       .catch(error => alert(error.message))
 		},
-		logout: function() {
+		logout() {
       firebase.auth().signOut();
       this.$router.push("/signin");
     },
