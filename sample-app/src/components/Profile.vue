@@ -71,12 +71,13 @@ export default {
 			const alert = confirm("本当に削除しますか");
 			if (alert == true) {
 				this.col.doc(uid).delete()
-				this.$router.push('/')
+				.then(this.$router.push("/"))
+				.catch(error => alet(error.message))
 			} else {
 				return ""
 			}
 		},
-		logout: function() {
+		logout() {
       firebase.auth().signOut();
       this.$router.push("/signin");
     },
