@@ -74,8 +74,9 @@ export default {
 				job: this.job,
 				skill: this.skill,
 				appeal: this.appeal,
-			});
-			this.$router.push("/profile");
+			})
+      .then(this.$router.push('/profile'))
+      .catch(error => alert(error.message));
 		},
 		logout: function() {
       firebase.auth().signOut();
