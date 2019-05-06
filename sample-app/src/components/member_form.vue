@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card class="pa-4">
+    <v-card class="pa-4" v-show="!loading">
 			<div class="d-flex">
 				<v-card-title class="font-weight-bold">新規会員登録フォーム(3分で完了)</v-card-title>
 				<span class="text-md-right"><v-btn @click="logout">ログアウト</v-btn></span>
@@ -41,13 +41,16 @@ export default {
       job: "",
       skill: "",
 			appeal: "",
+      loading: false,
     };
 	},
 	created() {
+    this.loading = true;
     firebase.auth().onAuthStateChanged(user => {
       // ログイン状態かどうかを判定
 			this.user = user;
       if (!user) this.$router.push("/signin");
+      this.loading = false;
 		});
 	},
 	methods: {
