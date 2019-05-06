@@ -32,7 +32,7 @@
 import firebase from 'firebase';
 
 export default {
-  name: "Signin",
+  name: "Member",
   data() {
     return {
 			user: "",
